@@ -1,7 +1,7 @@
 # QQDRAWER
 仿QQ抽屉效果
 
-![image]https://github.com/BlacksSky/QQDRAWER/blob/master/QQDRAWER.gif
+![image](https://github.com/BlacksSky/QQDRAWER/blob/master/QQDRAWER.gif raw=true)
 
 本项目实现了QQ中我们能看到的抽屉效果。
 比如，在消息界面点击左上角的头像打开抽屉，或者在关闭抽屉的任意界面通过左边缘侧滑打开抽屉。
