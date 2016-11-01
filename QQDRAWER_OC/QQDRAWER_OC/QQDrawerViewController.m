@@ -21,10 +21,12 @@
 @end
 @implementation QQDrawerViewController
 
+/**
+ 创建单例方法
+ */
 + (instancetype)shareDrawerViewController{
     return (QQDrawerViewController *)[UIApplication sharedApplication].keyWindow.rootViewController;
 }
-
 
 /**
  创建抽屉
@@ -51,11 +53,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.mainViewController.view.layer.shadowColor = [UIColor blackColor].CGColor;
     self.mainViewController.view.layer.shadowOffset = CGSizeMake(-1, -1);
     self.mainViewController.view.layer.shadowRadius = 4;
     self.mainViewController.view.layer.shadowOpacity = 0.8;
+    
     for (UIViewController *childViewController in self.mainViewController.childViewControllers) {
         [self addScreenEdgePanGestureRecognizerToView:childViewController.view];
     }
