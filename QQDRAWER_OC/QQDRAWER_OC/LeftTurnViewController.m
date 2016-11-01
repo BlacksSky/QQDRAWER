@@ -8,7 +8,7 @@
 
 #import "LeftTurnViewController.h"
 
-@interface LeftTurnViewController ()
+@interface LeftTurnViewController ()<UIWebViewDelegate>
 @property (nonatomic, strong)UILabel *label;
 @property (nonatomic, strong)UIView *lineView;
 @end
@@ -18,8 +18,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.label];
+    
     [self.view addSubview:self.lineView];
+    
+    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height)];
+    webView.delegate = self;
+    NSURL *url = [NSURL URLWithString:@"http://www.baidu.com"];
+    
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+    
+    [webView loadRequest:request];
+    
+    [self.view addSubview:webView];
+    
+}
+
+#pragma mark - UIWebViewDelegate
+/// 网页开始加载
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self.view addSubview:self.label];
+}
+
+/// 网页完成加载
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [self.label removeFromSuperview];
+    self.label = nil;
+    // 获取h5的标题
+    self.title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+}
+
+/// 网页加载失败
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    self.label.text = @"加载失败。。。";
 }
 
 - (void)didReceiveMemoryWarning {
